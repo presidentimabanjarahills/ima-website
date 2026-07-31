@@ -5,9 +5,9 @@ import { useCallback, useEffect, useState } from "react";
 
 const galleryImages = [
   "DSC_2670 (1).jpg",
-  "DSC_2670.jpg",
+  // "DSC_2670.jpg",
   "DSC_7927 (1).jpg",
-  "DSC_7927.jpg",
+  // "DSC_7927.jpg",
   "DSC_7934.jpg",
   "WhatsApp Image 2026-07-31 at 21.34.17.jpeg",
   "WhatsApp Image 2026-07-31 at 21.34.18 (1).jpeg",
