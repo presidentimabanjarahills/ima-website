@@ -203,6 +203,13 @@ export default function Header() {
                   Events
                   <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
                 </Link>
+                <Link
+                  href="/gallery"
+                  className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                >
+                  Gallery
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
               </div>
             </div>
           </div>
