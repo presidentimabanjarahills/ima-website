@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
-const galleryImages = [
+const BATCH_SIZE = 30;
+
+const galleryFiles = [
   "DSC_2670 (1).jpg",
-  // "DSC_2670.jpg",
   "DSC_7927 (1).jpg",
-  // "DSC_7927.jpg",
   "DSC_7934.jpg",
   "WhatsApp Image 2026-07-31 at 21.34.17.jpeg",
   "WhatsApp Image 2026-07-31 at 21.34.18 (1).jpeg",
@@ -34,13 +34,66 @@ const galleryImages = [
   "photo 10.jpg.jpeg",
   "photo 11.jpg.jpeg",
   "photo 12.jpg.jpeg",
-].map((file, index) => ({
-  src: `/nov-event-pic/${encodeURIComponent(file)}`,
-  alt: `IMA Banjara Hills November Event Photo ${index + 1}`,
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25 (4).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25 (5).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25 (6).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.25.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.26 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.26 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.26 (3).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.26.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.27 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.38.27.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14 (3).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14 (4).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14 (5).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.14.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.16 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.16 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.16 (3).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.16 (4).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.41.16.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (10).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (11).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (14).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (15).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (16).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (3).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (4).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (5).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (6).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (7).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (8).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46 (9).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.46.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.47 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.47 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.44.47.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.32 (1).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.32 (2).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.32 (3).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.32 (4).jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.32.jpeg",
+  "pics/WhatsApp Image 2026-08-08 at 14.46.33.jpeg",
+];
+
+const encodePath = (relativePath: string) =>
+  relativePath.split("/").map(encodeURIComponent).join("/");
+
+const galleryImages = galleryFiles.map((file, index) => ({
+  src: `/nov-event-pic/${encodePath(file)}`,
+  alt: `IMA Banjara Hills Event Photo ${index + 1}`,
 }));
 
 export default function GalleryPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(Math.min(BATCH_SIZE, galleryImages.length));
 
   const closeLightbox = useCallback(() => setActiveIndex(null), []);
 
@@ -56,6 +109,10 @@ export default function GalleryPage() {
     );
   }, []);
 
+  const loadMore = useCallback(() => {
+    setVisibleCount((current) => Math.min(current + BATCH_SIZE, galleryImages.length));
+  }, []);
+
   useEffect(() => {
     if (activeIndex === null) return;
 
@@ -69,6 +126,9 @@ export default function GalleryPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeIndex, closeLightbox, showPrev, showNext]);
 
+  const visibleImages = galleryImages.slice(0, visibleCount);
+  const remainingCount = galleryImages.length - visibleCount;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {/* Page Header */}
@@ -78,13 +138,13 @@ export default function GalleryPage() {
         </h1>
         <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-emerald-500 to-green-500 mx-auto rounded-full mb-6 sm:mb-8"></div>
         <p className="text-lg sm:text-xl md:text-2xl text-emerald-700 max-w-4xl mx-auto leading-relaxed">
-          Moments captured from the IMA Banjara Hills November event.
+          Moments captured from IMA Banjara Hills events.
         </p>
       </div>
 
       {/* Gallery Grid */}
       <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
-        {galleryImages.map((image, index) => (
+        {visibleImages.map((image, index) => (
           <button
             key={image.src}
             type="button"
@@ -104,6 +164,25 @@ export default function GalleryPage() {
           </button>
         ))}
       </div>
+
+      {/* Load More */}
+      {remainingCount > 0 && (
+        <div className="flex flex-col items-center gap-3 mt-10 sm:mt-14">
+          <button
+            type="button"
+            onClick={loadMore}
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-600 to-green-600 shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            Load {Math.min(BATCH_SIZE, remainingCount)} more photos
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <p className="text-xs sm:text-sm text-emerald-600">
+            Showing {visibleImages.length} of {galleryImages.length} photos
+          </p>
+        </div>
+      )}
 
       {/* Lightbox Modal */}
       {activeIndex !== null && (
