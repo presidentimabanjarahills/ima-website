@@ -5,6 +5,30 @@ import HeroSlider from "./components/HeroSlider";
 // IMA slides data with local images
 const slides = [
   {
+    id: 9,
+    imageUrl: "/WhatsApp Image 2026-08-20 at 13.37.00.jpeg",
+    altText: "Dr Prabhukumar Challagali honoured with the Reverend Jesse Jackson Award at the 2.0 Health Conference, Las Vegas",
+    title: "Reverend Jesse Jackson Award",
+    description: "Hyderabad-based physician Dr Prabhukumar Challagali honoured at the 2.0 Health Conference, Las Vegas, presented with the prestigious Reverend Jesse Jackson Award for his outstanding contributions to healthcare",
+    readMoreLink: "#achievements"
+  },
+  {
+    id: 10,
+    imageUrl: "/WhatsApp Image 2026-02-16 at 16.50.48.jpeg",
+    altText: "Dr Prabhukumar Challagali receiving an award from Honourable Justice Sri Ujjal Bhuyan, Supreme Court of India",
+    title: "Honoured by the Supreme Court of India",
+    description: "Dr Prabhukumar Challagali received a prestigious award from Honourable Justice Sri Ujjal Bhuyan, Supreme Court of India, recognising his dedicated service to the medical fraternity",
+    readMoreLink: "#achievements"
+  },
+  {
+    id: 11,
+    imageUrl: "/WhatsApp Image 2026-08-20 at 17.28.29.jpeg",
+    altText: "Dr Prabhukumar Challagali receiving an award from Dr Bobby Mukkamala of the American Medical Association",
+    title: "Honoured by the American Medical Association",
+    description: "Dr Prabhukumar Challagali received an award from Dr Bobby Mukkamala, one of the most renowned figures in the American Medical Association, honouring his leadership and contributions to global healthcare",
+    readMoreLink: "#achievements"
+  },
+  {
     id: 1,
     imageUrl: "/slider1.jpeg",
     altText: "Welcome to IMA Banjara Hills - Felicitation of Central Cabinet Minister Sri Kishan Reddy",
