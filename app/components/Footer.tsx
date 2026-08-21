@@ -25,9 +25,9 @@ export default function Footer() {
             <div>
               <h4 className="text-base sm:text-lg font-semibold text-emerald-100 mb-4 sm:mb-6">Quick Links</h4>
               <ul className="space-y-2 sm:space-y-3">
-                <li><a href="#" className="text-emerald-200 hover:text-white transition-colors text-sm sm:text-base">About Us</a></li>
+                <li><a href="/about/who-we-are" className="text-emerald-200 hover:text-white transition-colors text-sm sm:text-base">About Us</a></li>
                 <li><a href="/events" className="text-emerald-200 hover:text-white transition-colors text-sm sm:text-base">Events</a></li>
-                <li><a href="#" className="text-emerald-200 hover:text-white transition-colors text-sm sm:text-base">Contact</a></li>
+                <li><a href="mailto:presidentimabanjarahills@gmail.com" className="text-emerald-200 hover:text-white transition-colors text-sm sm:text-base">Contact</a></li>
               </ul>
             </div>
 
