@@ -121,7 +121,7 @@ export default function CountrySelector({ value, onChange, error, placeholder = 
                 placeholder="Search countries..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-navy focus:border-brand-navy text-sm"
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-navy focus:border-brand-navy text-base sm:text-sm"
               />
             </div>
           </div>

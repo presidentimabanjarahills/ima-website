@@ -2,12 +2,48 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useEscapeToClose } from "../lib/useEscapeToClose";
+
+const mobileNavLinks = [
+  { href: "/", label: "Home" },
+  { href: "/events", label: "Events" },
+  { href: "/news", label: "News" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/initiatives", label: "Initiatives" },
+  { href: "/membership", label: "Membership" },
+  { href: "/contact", label: "Contact" },
+];
+
+const aboutSubLinks = [
+  { href: "/about/ima", title: "About IMA", subtitle: "Vision, Mission & Objectives" },
+  { href: "/about/who-we-are", title: "Who We Are", subtitle: "About IMA Banjara Hills" },
+  { href: "/leadership", title: "Leadership", subtitle: "Office Bearers & Advisory Board" },
+];
 
 export default function Header() {
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEscapeToClose(isMobileMenuOpen, () => setIsMobileMenuOpen(false));
+
+  // Lock background scroll while the mobile nav panel is open.
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileMenuOpen]);
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsMobileAboutOpen(false);
+  };
 
   const handleMouseEnter = () => {
     if (hoverTimeoutRef.current) {
@@ -36,23 +72,23 @@ export default function Header() {
               <span>Follow us on social media for latest updates</span>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <a 
-                href="https://www.facebook.com/prabhukumar.challagali?rdid=FRwj9Eov9cwhr3tQ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19ohATfMHj%2F#" 
+              <a
+                href="https://www.facebook.com/prabhukumar.challagali?rdid=FRwj9Eov9cwhr3tQ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19ohATfMHj%2F#"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook" 
-                className="rounded-full p-1.5 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40 transition"
+                aria-label="Facebook"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40 transition"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M22.675 0h-21.35C.595 0 0 .595 0 1.326v21.348C0 23.404.595 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.41c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.765v2.314h3.59l-.467 3.696h-3.123V24h6.116C23.405 24 24 23.404 24 22.674V1.326C24 .595 23.405 0 22.675 0z"/>
                 </svg>
               </a>
-              <a 
-                href="https://www.youtube.com/@dr.prabhuhealthtv29" 
+              <a
+                href="https://www.youtube.com/@dr.prabhuhealthtv29"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="YouTube" 
-                className="rounded-full p-1.5 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40 transition"
+                aria-label="YouTube"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/40 transition"
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -137,7 +173,25 @@ export default function Header() {
         {/* Navigation Bar */}
         <nav className="bg-white/60 backdrop-blur-sm py-3" role="navigation" aria-label="Primary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-center">
+            {/* Mobile / tablet: hamburger trigger for the off-canvas menu */}
+            <div className="flex lg:hidden items-center justify-between">
+              <span className="font-bold text-brand-navy">Menu</span>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-nav-panel"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full bg-white/70 border border-brand-navy/10 text-brand-navy shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Desktop pill nav - unchanged at lg and above */}
+            <div className="hidden lg:flex items-center justify-center">
               <div className="flex items-center gap-2 sm:gap-4 bg-white/70 backdrop-blur-md border border-brand-navy/10 shadow-sm rounded-full px-2 sm:px-4 py-2 flex-wrap">
                 <Link
                   href="/"
@@ -271,6 +325,93 @@ export default function Header() {
           </div>
         </nav>
       </header>
+
+      {/* Mobile off-canvas nav panel */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[999] lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <button
+            type="button"
+            aria-label="Close menu overlay"
+            className="absolute inset-0 bg-black/50"
+            onClick={closeMobileMenu}
+          />
+          <div
+            id="mobile-nav-panel"
+            className="absolute top-0 right-0 h-full w-full max-w-xs sm:max-w-sm bg-white shadow-2xl overflow-y-auto"
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b border-brand-navy/10">
+              <span className="font-bold text-brand-navy text-lg">Menu</span>
+              <button
+                type="button"
+                onClick={closeMobileMenu}
+                aria-label="Close menu"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-brand-navy hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="flex flex-col p-2" aria-label="Mobile primary">
+              <Link
+                href="/"
+                onClick={closeMobileMenu}
+                className="px-4 py-3.5 min-h-[44px] flex items-center rounded-lg text-brand-navy font-semibold text-base hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+              >
+                Home
+              </Link>
+
+              {/* About Us accordion */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setIsMobileAboutOpen((open) => !open)}
+                  aria-expanded={isMobileAboutOpen}
+                  aria-controls="mobile-about-submenu"
+                  className="w-full px-4 py-3.5 min-h-[44px] flex items-center justify-between rounded-lg text-brand-navy font-semibold text-base hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                >
+                  About Us
+                  <svg
+                    className={`w-5 h-5 transition-transform duration-200 ${isMobileAboutOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {isMobileAboutOpen && (
+                  <div id="mobile-about-submenu" className="pl-4 pb-1 flex flex-col">
+                    {aboutSubLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={closeMobileMenu}
+                        className="px-4 py-3 min-h-[44px] flex flex-col justify-center rounded-lg text-brand-navy hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                      >
+                        <span className="font-medium text-sm">{link.title}</span>
+                        <span className="text-xs text-brand-navy/60">{link.subtitle}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {mobileNavLinks.slice(1).map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={closeMobileMenu}
+                  className="px-4 py-3.5 min-h-[44px] flex items-center rounded-lg text-brand-navy font-semibold text-base hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
     </>
   );
 }

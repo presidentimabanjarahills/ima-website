@@ -242,7 +242,7 @@ export default function EventsPage() {
               </h3>
               <button
                 onClick={() => setSelectedPastEvent(null)}
-                className="text-white hover:text-brand-surface transition-colors p-1.5 sm:p-2 rounded-full hover:bg-white/20 flex-shrink-0"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:text-brand-surface transition-colors rounded-full hover:bg-white/20 flex-shrink-0"
                 aria-label="Close modal"
               >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

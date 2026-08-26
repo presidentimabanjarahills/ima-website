@@ -89,23 +89,23 @@ export default function Footer() {
             <div className="flex items-center gap-3 sm:gap-4">
               <span className="text-brand-surface text-sm sm:text-base font-medium">Follow Us:</span>
               <div className="flex items-center gap-2 sm:gap-3">
-                <a 
-                  href="https://www.facebook.com/prabhukumar.challagali?rdid=FRwj9Eov9cwhr3tQ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19ohATfMHj%2F#" 
+                <a
+                  href="https://www.facebook.com/prabhukumar.challagali?rdid=FRwj9Eov9cwhr3tQ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19ohATfMHj%2F#"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Facebook" 
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-brand-navy hover:bg-brand-navy-dark rounded-full flex items-center justify-center transition-colors"
+                  aria-label="Facebook"
+                  className="min-w-[44px] min-h-[44px] bg-brand-navy hover:bg-brand-navy-dark rounded-full flex items-center justify-center transition-colors"
                 >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M22.675 0h-21.35C.595 0 0 .595 0 1.326v21.348C0 23.404.595 24 1.326 24h11.495v-9.294H9.691V11.01h3.13V8.41c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.765v2.314h3.59l-.467 3.696h-3.123V24h6.116C23.405 24 24 23.404 24 22.674V1.326C24 .595 23.405 0 22.675 0z"/>
                   </svg>
                 </a>
-                <a 
-                  href="https://www.youtube.com/@dr.prabhuhealthtv29" 
+                <a
+                  href="https://www.youtube.com/@dr.prabhuhealthtv29"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="YouTube" 
-                  className="w-8 h-8 sm:w-10 sm:h-10 bg-brand-navy hover:bg-brand-navy-dark rounded-full flex items-center justify-center transition-colors"
+                  aria-label="YouTube"
+                  className="min-w-[44px] min-h-[44px] bg-brand-navy hover:bg-brand-navy-dark rounded-full flex items-center justify-center transition-colors"
                 >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>

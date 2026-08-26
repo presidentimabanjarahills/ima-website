@@ -110,7 +110,7 @@ export default function AboutIMAPage() {
                     <p className="text-gray-700 leading-relaxed mb-4">
                       When it comes to updating the knowledge of its members and keeping them abreast of the latest technologies in health care, we have academic wings for general practitioners, for specialists and for online courses:
                     </p>
-                    <div className="grid md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       <div className="bg-white p-4 rounded-lg shadow-sm border border-blue-100">
                         <h4 className="font-semibold text-brand-navy mb-2">IMA College of General Practitioners</h4>
                         <p className="text-sm text-gray-600">Specialized training for general practitioners</p>

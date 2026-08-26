@@ -85,6 +85,33 @@ export default function HeroSlider({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToNext, goToPrevious, isAutoPlaying]);
 
+  // Touch swipe navigation
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const SWIPE_THRESHOLD = 50;
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    const touch = event.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+    touchStartRef.current = null;
+
+    // Ignore mostly-vertical swipes so page scrolling still works.
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    if (deltaX < 0) {
+      goToNext();
+    } else {
+      goToPrevious();
+    }
+  };
+
   if (!slides || slides.length === 0) {
     return (
       <div className="w-full h-96 bg-gray-200 flex items-center justify-center">
@@ -94,14 +121,16 @@ export default function HeroSlider({
   }
 
   return (
-    <section 
-      className="relative w-full h-[67vh] md:h-[75vh] max-h-[700px] overflow-hidden"
+    <section
+      className="relative w-full h-[67vh] md:h-[75vh] max-h-[700px] [@media(max-width:1200px)_and_(orientation:landscape)]:max-h-[480px] overflow-hidden"
       role="region"
       aria-label="Hero slider"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
       onFocus={() => setIsAutoPlaying(false)}
       onBlur={() => setIsAutoPlaying(true)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Slides Container - only the active slide is mounted, so the other
           slides' images aren't fetched until they're actually shown. */}
@@ -146,12 +175,12 @@ export default function HeroSlider({
 
         {/* Slide Indicators */}
         {slides.length > 1 && (
-          <div className="flex justify-center gap-2 sm:gap-3 mt-3 sm:mt-4">
+          <div className="flex flex-wrap justify-center gap-1 sm:gap-3 mt-3 sm:mt-4 max-w-full">
             {slides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => handleSlideChange(index)}
-                className="group p-2.5 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-full"
+                className="group min-w-[44px] min-h-[44px] p-2.5 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-full"
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={index === currentSlide}
               >
@@ -173,7 +202,7 @@ export default function HeroSlider({
         <>
            <button
              onClick={goToPrevious}
-             className="absolute left-2 sm:left-4 md:left-6 top-1/2 transform -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
+             className="absolute left-2 sm:left-4 md:left-6 top-1/2 transform -translate-y-1/2 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
              aria-label="Previous slide"
            >
              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +212,7 @@ export default function HeroSlider({
            
            <button
              onClick={goToNext}
-             className="absolute right-2 sm:right-4 md:right-6 top-1/2 transform -translate-y-1/2 bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
+             className="absolute right-2 sm:right-4 md:right-6 top-1/2 transform -translate-y-1/2 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white p-2 sm:p-3 md:p-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
              aria-label="Next slide"
            >
              <svg className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,7 +227,7 @@ export default function HeroSlider({
          <div className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6">
            <button
              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-             className="bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white p-2 sm:p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
+             className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/25 backdrop-blur-sm hover:bg-white/35 text-white rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50 shadow-lg hover:shadow-xl hover:scale-110 touch-manipulation"
              aria-label={isAutoPlaying ? 'Pause slideshow' : 'Resume slideshow'}
            >
              {isAutoPlaying ? (

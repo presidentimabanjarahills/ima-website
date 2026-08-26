@@ -382,7 +382,7 @@ export default function HomeClient() {
             <div className="w-20 h-1 bg-gradient-to-r from-brand-navy to-brand-teal mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {initiatives.map((initiative) => (
               <Link
                 key={initiative.title}
@@ -443,7 +443,7 @@ export default function HomeClient() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-brand-navy to-brand-teal bg-clip-text text-transparent mb-8 sm:mb-12 text-center">
             Registered IMA Members
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {/* IMA ID Card */}
             <div className="bg-white/70 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg border border-brand-navy/10 p-4 sm:p-6 text-center hover:shadow-xl transition-all duration-300">
               <div className="w-12 h-12 sm:w-16 sm:h-16 bg-brand-navy rounded-full mx-auto mb-4 sm:mb-6 flex items-center justify-center">

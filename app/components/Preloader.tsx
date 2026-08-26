@@ -98,6 +98,16 @@ export default function Preloader() {
   const pageLoadedRef = useRef(false);
   const minTimeElapsedRef = useRef(false);
 
+  // Safety net: if AnimatePresence's onExitComplete never fires for any
+  // reason, this forces the content tree back to interactive shortly after
+  // the exit animation should have finished, so a preloader glitch can
+  // never permanently lock out the rest of the site.
+  useEffect(() => {
+    if (!isExiting) return;
+    const fallback = setTimeout(() => setShowPreloader(false), 1500);
+    return () => clearTimeout(fallback);
+  }, [isExiting]);
+
   // Toggle inert on the real content tree while the preloader covers it, so
   // keyboard focus and screen readers can't reach it underneath.
   useEffect(() => {
@@ -154,15 +164,15 @@ export default function Preloader() {
 
   return (
     <AnimatePresence onExitComplete={handleExitComplete}>
-      {showPreloader && (
+      {!isExiting && (
         <motion.div
           key="preloader"
           role="status"
           aria-live="polite"
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-brand-navy"
           initial={false}
-          animate={isExiting ? exitAnimation : {}}
-          style={{ willChange: isExiting ? 'transform, opacity' : undefined }}
+          exit={exitAnimation}
+          style={{ willChange: 'transform, opacity' }}
         >
           <span className="sr-only">Loading IMA Banjara Hills</span>
 
@@ -194,13 +204,13 @@ export default function Preloader() {
                   aria-hidden="true"
                   viewBox="0 0 400 60"
                   preserveAspectRatio="none"
-                  className="pointer-events-none absolute w-64 sm:w-96 h-auto opacity-25"
+                  className="pointer-events-none absolute w-64 sm:w-96 h-auto opacity-50"
                 >
                   <motion.path
                     d="M0,30 L140,30 L162,8 L184,52 L206,30 L400,30"
                     fill="none"
                     stroke="var(--color-brand-gold)"
-                    strokeWidth={2}
+                    strokeWidth={4}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     initial={{ pathLength: 0 }}

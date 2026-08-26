@@ -58,7 +58,7 @@ export default function CalendarView({ events }: { events: UpcomingEvent[] }) {
       <div className="flex items-center justify-between mb-4 sm:mb-6">
         <button
           onClick={() => setViewDate(new Date(year, month - 1, 1))}
-          className="p-2 rounded-full hover:bg-brand-surface text-brand-navy transition-colors"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-brand-surface text-brand-navy transition-colors"
           aria-label="Previous month"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@ export default function CalendarView({ events }: { events: UpcomingEvent[] }) {
         </h3>
         <button
           onClick={() => setViewDate(new Date(year, month + 1, 1))}
-          className="p-2 rounded-full hover:bg-brand-surface text-brand-navy transition-colors"
+          className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-brand-surface text-brand-navy transition-colors"
           aria-label="Next month"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
