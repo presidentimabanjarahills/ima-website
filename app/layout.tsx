@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Preloader from "./components/Preloader";
 import { SITE_URL, SITE_NAME } from "./lib/site";
 
 const geistSans = Geist({
@@ -82,7 +83,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <div className="min-h-screen bg-brand-surface">
+        <Preloader />
+        <div id="app-content" className="min-h-screen bg-brand-surface">
           <Header />
           <main>
             {children}
