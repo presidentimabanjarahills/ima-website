@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <>
       {/* Social Media Strip */}
-      <div className="bg-emerald-600 text-white py-2">
+      <div className="bg-brand-navy text-white py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-white/90 text-xs sm:text-sm">
@@ -64,9 +64,9 @@ export default function Header() {
       </div>
 
       {/* Header Section */}
-      <header className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-emerald-100 relative z-50">
+      <header className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-brand-navy/10 relative z-50">
         {/* Top Contact Bar */}
-        <div className="bg-[#f6f6f6] text-py-2 bg-green-100 py-2 sm:py-3">
+        <div className="bg-[#f6f6f6] text-py-2 bg-brand-surface py-2 sm:py-3">
           <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-0">
               {/* Logo Space */}
@@ -91,38 +91,38 @@ export default function Header() {
               
               {/* Contact Information - 3 Columns */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-0 w-full lg:w-auto px-4 sm:px-8 lg:px-24">
-                <div className="flex items-center gap-1 sm:gap-2 text-emerald-800 min-w-0">
+                <div className="flex items-center gap-1 sm:gap-2 text-brand-navy min-w-0">
                   <div className="flex items-center justify-center flex-shrink-0"><svg className="w-6 h-5 sm:w-8 sm:h-6 md:w-10 md:h-8" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg></div>
                   <div className="flex flex-col min-w-0">
-                      <span className="text-xs sm:text-sm font-medium" style={{color: "#808080"}}>MAIL US TODAY</span>
+                      <span className="text-xs sm:text-sm font-medium text-brand-navy/70">MAIL US TODAY</span>
                       <span className="text-[10px] sm:text-[12px] break-words">presidentimabanjarahills@gmail.com</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 sm:gap-2 text-emerald-800 min-w-0">
+                <div className="flex items-center gap-1 sm:gap-2 text-brand-navy min-w-0">
                   <div className="flex items-center justify-center flex-shrink-0"><svg className="w-6 h-5 sm:w-8 sm:h-6 md:w-10 md:h-8" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                     </svg></div>
                   <div className="flex flex-col min-w-0">
-                      <span className="text-xs sm:text-sm font-medium" style={{color: "#808080"}}>CALL US</span>
+                      <span className="text-xs sm:text-sm font-medium text-brand-navy/70">CALL US</span>
                       <span className="text-[10px] sm:text-[12px]">+91 99892-20003</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 sm:gap-2 text-emerald-800 min-w-0 sm:col-span-2 lg:col-span-1">
+                <div className="flex items-center gap-1 sm:gap-2 text-brand-navy min-w-0 sm:col-span-2 lg:col-span-1">
                   <div className="flex items-center justify-center flex-shrink-0"><svg className="w-6 h-5 sm:w-8 sm:h-6 md:w-10 md:h-8" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg></div>
                   <div className="flex flex-col min-w-0">
-                      <span className="text-xs sm:text-sm font-medium" style={{color: "#808080"}}>ADDRESS</span>
+                      <span className="text-xs sm:text-sm font-medium text-brand-navy/70">ADDRESS</span>
                       <a 
                         href="https://maps.app.goo.gl/ZCu58bikwGTUqWij7" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-[9px] sm:text-[11px] leading-tight hover:text-emerald-600 transition-colors duration-200"
+                        className="text-[9px] sm:text-[11px] leading-tight hover:text-brand-teal transition-colors duration-200"
                       >
-                        <div className="font-semibold text-emerald-900 hover:text-emerald-700 break-words">Dr Prabhu Life Multispeciality Clinics and Hospital</div>
+                        <div className="font-semibold text-brand-navy hover:text-brand-teal break-words">Dr Prabhu Life Multispeciality Clinics and Hospital</div>
                         <div>House No 3-2-10/6, 3rd Floor</div>
                         <div>Chaitanyanagar Colony, Manikonda</div>
                         <div>Hyderabad 500089</div>
@@ -138,22 +138,42 @@ export default function Header() {
         <nav className="bg-white/60 backdrop-blur-sm py-3" role="navigation" aria-label="Primary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center">
-              <div className="flex items-center gap-2 sm:gap-4 bg-white/70 backdrop-blur-md border border-emerald-100 shadow-sm rounded-full px-2 sm:px-4 py-2 flex-wrap">
+              <div className="flex items-center gap-2 sm:gap-4 bg-white/70 backdrop-blur-md border border-brand-navy/10 shadow-sm rounded-full px-2 sm:px-4 py-2 flex-wrap">
                 <Link
                   href="/"
-                  className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                 >
                   Home
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <div 
-                  className="relative" 
+                <div
+                  className="relative"
                   ref={dropdownRef}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setIsAboutDropdownOpen(false);
+                      (e.currentTarget.querySelector('button') as HTMLButtonElement | null)?.focus();
+                    }
+                  }}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+                      setIsAboutDropdownOpen(false);
+                    }
+                  }}
                 >
                   <button
-                    className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 flex items-center gap-1"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded={isAboutDropdownOpen}
+                    aria-controls="about-dropdown-menu"
+                    onClick={() => setIsAboutDropdownOpen((open) => !open)}
+                    onFocus={() => {
+                      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+                      setIsAboutDropdownOpen(true);
+                    }}
+                    className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy flex items-center gap-1"
                   >
                     About Us
                     <svg 
@@ -164,13 +184,14 @@ export default function Header() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                    <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
                   </button>
 
                   {/* Dropdown Menu */}
                   {isAboutDropdownOpen && (
-                    <div 
-                      className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-2xl border-2 border-emerald-200"
+                    <div
+                      id="about-dropdown-menu"
+                      className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-2xl border-2 border-brand-navy/15"
                       style={{ 
                         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
                         minHeight: '200px',
@@ -180,17 +201,24 @@ export default function Header() {
                       <div className="py-2">
                         <Link
                           href="/about/ima"
-                          className="block px-4 py-3 text-sm text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors duration-200 border-b border-emerald-100"
+                          className="block px-4 py-3 text-sm text-brand-navy hover:bg-brand-surface hover:text-brand-teal transition-colors duration-200 border-b border-brand-navy/10"
                         >
                           <div className="font-semibold">About IMA</div>
-                          <div className="text-xs text-emerald-600 mt-1">Vision, Mission & Objectives</div>
+                          <div className="text-xs text-brand-navy mt-1">Vision, Mission & Objectives</div>
                         </Link>
                         <Link
                           href="/about/who-we-are"
-                          className="block px-4 py-3 text-sm text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors duration-200"
+                          className="block px-4 py-3 text-sm text-brand-navy hover:bg-brand-surface hover:text-brand-teal transition-colors duration-200 border-b border-brand-navy/10"
                         >
                           <div className="font-semibold">Who We Are</div>
-                          <div className="text-xs text-emerald-600 mt-1">About IMA Banjara Hills</div>
+                          <div className="text-xs text-brand-navy mt-1">About IMA Banjara Hills</div>
+                        </Link>
+                        <Link
+                          href="/leadership"
+                          className="block px-4 py-3 text-sm text-brand-navy hover:bg-brand-surface hover:text-brand-teal transition-colors duration-200"
+                        >
+                          <div className="font-semibold">Leadership</div>
+                          <div className="text-xs text-brand-navy mt-1">Office Bearers & Advisory Board</div>
                         </Link>
                       </div>
                     </div>
@@ -198,25 +226,46 @@ export default function Header() {
                 </div>
                 <Link
                   href="/events"
-                  className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                 >
                   Events
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+                <Link
+                  href="/news"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                >
+                  News
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
                 </Link>
                 <Link
                   href="/gallery"
-                  className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                 >
                   Gallery
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <a
-                  href="mailto:presidentimabanjarahills@gmail.com"
-                  className="text-emerald-700 hover:text-green-700 font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                <Link
+                  href="/initiatives"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                >
+                  Initiatives
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+                <Link
+                  href="/membership"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
+                >
+                  Membership
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-brand-navy hover:text-brand-teal font-semibold text-sm sm:text-base transition-all duration-300 relative group px-3 sm:px-4 py-1.5 rounded-full hover:bg-brand-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy"
                 >
                   Contact
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
-                </a>
+                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-300 group-hover:w-full"></span>
+                </Link>
               </div>
             </div>
           </div>

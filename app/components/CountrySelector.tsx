@@ -75,14 +75,14 @@ export default function CountrySelector({ value, onChange, error, placeholder = 
       <button
         type="button"
         onClick={handleToggle}
-        className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-left flex items-center justify-between ${
-          error ? 'border-red-500 bg-red-50' : 'border-emerald-200 focus:border-emerald-500 hover:border-emerald-300'
+        className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-navy text-left flex items-center justify-between ${
+          error ? 'border-red-500 bg-red-50' : 'border-brand-navy/15 focus:border-brand-navy hover:border-brand-teal/50'
         }`}
       >
         <div className="flex items-center gap-3">
           {selectedCountry ? (
             <>
-              <span className="text-emerald-900 font-medium">{selectedCountry.dialCode}</span>
+              <span className="text-brand-navy font-medium">{selectedCountry.dialCode}</span>
               <span className="text-gray-600 text-sm">{selectedCountry.name}</span>
             </>
           ) : (
@@ -121,7 +121,7 @@ export default function CountrySelector({ value, onChange, error, placeholder = 
                 placeholder="Search countries..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm"
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-navy focus:border-brand-navy text-sm"
               />
             </div>
           </div>
@@ -136,18 +136,18 @@ export default function CountrySelector({ value, onChange, error, placeholder = 
                     key={country.name}
                     type="button"
                     onClick={() => handleSelect(country)}
-                    className={`w-full px-4 py-3 text-left hover:bg-emerald-50 transition-colors duration-150 flex items-center gap-3 ${
-                      value === combinedValue ? 'bg-emerald-100 text-emerald-900' : 'text-gray-900'
+                    className={`w-full px-4 py-3 text-left hover:bg-brand-surface transition-colors duration-150 flex items-center gap-3 ${
+                      value === combinedValue ? 'bg-brand-surface text-brand-navy' : 'text-gray-900'
                     }`}
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-emerald-600">{country.dialCode}</span>
+                        <span className="font-medium text-brand-navy">{country.dialCode}</span>
                       </div>
                       <div className="text-sm text-gray-700 truncate">{country.name}</div>
                     </div>
                     {value === combinedValue && (
-                      <svg className="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-brand-navy" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     )}

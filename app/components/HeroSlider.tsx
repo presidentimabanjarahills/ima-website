@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 interface Slide {
@@ -26,6 +26,13 @@ export default function HeroSlider({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Skip the fade-in animation on the very first paint so it never delays
+  // the initial slide's LCP - only animate on later slide changes.
+  const isInitialRender = useRef(true);
+  useEffect(() => {
+    isInitialRender.current = false;
+  }, []);
 
   // Auto-play functionality
   useEffect(() => {
@@ -96,42 +103,39 @@ export default function HeroSlider({
       onFocus={() => setIsAutoPlaying(false)}
       onBlur={() => setIsAutoPlaying(true)}
     >
-      {/* Slides Container */}
-      <div className="relative w-full h-full">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-            aria-hidden={index !== currentSlide}
-          >
-            {/* Background Image */}
-            <div className="relative w-full h-full">
+      {/* Slides Container - only the active slide is mounted, so the other
+          slides' images aren't fetched until they're actually shown. */}
+      <div className="relative w-full h-full bg-brand-navy">
+        <div
+          key={slides[currentSlide].id}
+          className={`absolute inset-0 ${isInitialRender.current ? '' : 'hero-slide-in'}`}
+          style={{ animationDuration: `${transitionDuration}ms` }}
+        >
+          {/* Background Image */}
+          <div className="relative w-full h-full overflow-hidden">
+             <div className="absolute inset-0 hero-kenburns">
                <Image
-                 src={slide.imageUrl}
-                 alt={slide.altText}
+                 src={slides[currentSlide].imageUrl}
+                 alt={slides[currentSlide].altText}
                  fill
+                 sizes="100vw"
                  className="object-contain"
-                 priority={index === 0}
+                 priority={currentSlide === 0}
                  onError={(e) => {
-                   console.error('Image failed to load:', slide.imageUrl, e);
-                 }}
-                 onLoad={() => {
-                   console.log('Image loaded successfully:', slide.imageUrl);
+                   console.error('Image failed to load:', slides[currentSlide].imageUrl, e);
                  }}
                />
-              
-              {/* Light overlay for better text readability */}
-              <div className="absolute inset-0 bg-black/20"></div>
-            </div>
+             </div>
+
+            {/* Light overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/20"></div>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Text Content Below Slider */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/85 via-black/70 to-transparent p-3 sm:p-4 md:p-6 lg:p-8">
-        <div className="text-center text-white max-w-5xl mx-auto">
+        <div key={currentSlide} className="text-center text-white max-w-5xl mx-auto hero-text-in">
           <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 leading-tight drop-shadow-lg px-2 sm:px-4">
             {slides[currentSlide]?.title}
           </h1>
@@ -139,6 +143,29 @@ export default function HeroSlider({
             {slides[currentSlide]?.description}
           </p>
         </div>
+
+        {/* Slide Indicators */}
+        {slides.length > 1 && (
+          <div className="flex justify-center gap-2 sm:gap-3 mt-3 sm:mt-4">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleSlideChange(index)}
+                className="group p-2.5 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 rounded-full"
+                aria-label={`Go to slide ${index + 1}`}
+                aria-current={index === currentSlide}
+              >
+                <span
+                  className={`block h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? 'w-6 sm:w-8 bg-gradient-to-r from-brand-navy to-brand-teal shadow-md'
+                      : 'w-1.5 sm:w-2 bg-white/50 group-hover:bg-white/80'
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Navigation Arrows */}
@@ -166,24 +193,6 @@ export default function HeroSlider({
         </>
       )}
 
-      {/* Slide Indicators - Commented out */}
-      {/* {slides.length > 1 && (
-         <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 sm:space-x-4">
-           {slides.map((_, index) => (
-             <button
-               key={index}
-               onClick={() => handleSlideChange(index)}
-               className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-lg ${
-                 index === currentSlide 
-                   ? 'bg-gradient-to-r from-emerald-400 to-green-500 scale-125 shadow-xl' 
-                   : 'bg-white/60 hover:bg-white/80 hover:scale-110'
-               }`}
-               aria-label={`Go to slide ${index + 1}`}
-             />
-           ))}
-         </div>
-      )} */}
-
       {/* Auto-play Indicator */}
       {slides.length > 1 && (
          <div className="absolute top-3 sm:top-4 md:top-6 right-3 sm:right-4 md:right-6">
@@ -209,7 +218,7 @@ export default function HeroSlider({
        {isAutoPlaying && slides.length > 1 && (
          <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20 backdrop-blur-sm z-10">
            <div 
-             className="h-full bg-gradient-to-r from-emerald-400 to-green-500 transition-all duration-100 ease-linear shadow-lg"
+             className="h-full bg-gradient-to-r from-brand-navy to-brand-teal transition-all duration-100 ease-linear shadow-lg"
              style={{
                width: '100%',
                animation: `progress ${autoPlayInterval}ms linear infinite`
@@ -222,6 +231,47 @@ export default function HeroSlider({
         @keyframes progress {
           from { width: 100%; }
           to { width: 0%; }
+        }
+
+        @keyframes kenburns {
+          from { transform: scale(1); }
+          to { transform: scale(1.08); }
+        }
+
+        .hero-kenburns {
+          animation: kenburns 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroTextIn {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-text-in {
+          animation: heroTextIn 600ms ease-out both;
+        }
+
+        @keyframes heroSlideIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .hero-slide-in {
+          animation-name: heroSlideIn;
+          animation-timing-function: ease-in-out;
+          animation-fill-mode: both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-kenburns {
+            animation: none;
+          }
+          .hero-text-in {
+            animation: none;
+          }
+          .hero-slide-in {
+            animation: none;
+          }
         }
       `}</style>
     </section>
