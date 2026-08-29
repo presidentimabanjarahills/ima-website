@@ -120,8 +120,8 @@ export default function InitiativesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="relative h-56 md:h-full min-h-[220px]">
               <Image
-                src="/presidentnote.jpg"
-                alt="Dr. Prabhukumar Challagali, Chairman of the Media & Anti-Quackery Committee, Telangana State IMA"
+                src="/slider8.jpeg"
+                alt="Dr. Prabhukumar Challagali, Chairman of the Media & Anti-Quackery Committee, Telangana State IMA, at an official IMA Banjara Hills function"
                 fill
                 sizes="(min-width: 768px) 470px, 100vw"
                 className="object-cover object-top"
@@ -155,8 +155,8 @@ export default function InitiativesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="relative h-56 md:h-full min-h-[220px] order-1 md:order-2">
               <Image
-                src="/presidentnote.jpg"
-                alt="Dr. Prabhukumar Challagali, who led IMA's medical relief mission to Kangpokpi, Manipur"
+                src="/slider6.jpeg"
+                alt="Dr. Prabhukumar Challagali with Kangpokpi District Manipur Police and medical relief supplies during IMA's disaster relief mission"
                 fill
                 sizes="(min-width: 768px) 470px, 100vw"
                 className="object-cover object-top"
