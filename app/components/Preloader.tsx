@@ -8,17 +8,20 @@ import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer
 // repeat hard refreshes. Intentionally left OFF for now so it always plays
 // on a fresh load.
 
-const MIN_SHOW_MS = 1800;
-const MAX_SHOW_MS = 3000;
-const REDUCED_MOTION_SHOW_MS = 600;
-
 // Sequenced timing (seconds) for the full-motion choreography - each phase
-// starts once the previous one finishes, driven declaratively via
-// transition delays rather than setTimeout chains.
+// starts only once the previous one finishes, driven declaratively via
+// transition delays rather than setTimeout chains. The EKG pulse draws and
+// settles first; IMA only begins revealing once it's fully at rest.
+const SMOOTH_EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const PULSE_DURATION = 0.9;
+const PULSE_SETTLE_GAP = 0.15;
+const IMA_START_AT = PULSE_DURATION + PULSE_SETTLE_GAP;
+
 const IMA_LETTER_COUNT = 3;
-const IMA_STAGGER = 0.06;
-const IMA_LETTER_DURATION = 0.4;
-const IMA_DONE_AT = (IMA_LETTER_COUNT - 1) * IMA_STAGGER + IMA_LETTER_DURATION;
+const IMA_STAGGER = 0.07;
+const IMA_LETTER_DURATION = 0.45;
+const IMA_DONE_AT = IMA_START_AT + (IMA_LETTER_COUNT - 1) * IMA_STAGGER + IMA_LETTER_DURATION;
 
 const RULE_DURATION = 0.4;
 const RULE_DONE_AT = IMA_DONE_AT + RULE_DURATION;
@@ -26,10 +29,18 @@ const RULE_DONE_AT = IMA_DONE_AT + RULE_DURATION;
 const BANJARA_TEXT = 'Banjara Hills';
 const BANJARA_STAGGER = 0.025;
 const BANJARA_LETTER_DURATION = 0.35;
+const BANJARA_DONE_AT =
+  RULE_DONE_AT + (BANJARA_TEXT.length - 1) * BANJARA_STAGGER + BANJARA_LETTER_DURATION;
+
+// Show times must comfortably exceed the full choreography above, or the
+// exit could clip the animation mid-sequence on a fast page load.
+const MIN_SHOW_MS = Math.round((BANJARA_DONE_AT + 0.5) * 1000);
+const MAX_SHOW_MS = MIN_SHOW_MS + 900;
+const REDUCED_MOTION_SHOW_MS = 600;
 
 const imaContainerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: IMA_STAGGER } },
+  visible: { transition: { delayChildren: IMA_START_AT, staggerChildren: IMA_STAGGER } },
 };
 
 const imaLetterVariants: Variants = {
@@ -38,7 +49,7 @@ const imaLetterVariants: Variants = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: IMA_LETTER_DURATION, ease: 'easeOut' },
+    transition: { duration: IMA_LETTER_DURATION, ease: SMOOTH_EASE },
   },
 };
 
@@ -55,7 +66,7 @@ const banjaraLetterVariants: Variants = {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: BANJARA_LETTER_DURATION, ease: 'easeOut' },
+    transition: { duration: BANJARA_LETTER_DURATION, ease: SMOOTH_EASE },
   },
 };
 
@@ -213,9 +224,12 @@ export default function Preloader() {
                     strokeWidth={4}
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: RULE_DONE_AT + 1, ease: 'easeInOut' }}
+                    initial={{ pathLength: 0, opacity: 0.6 }}
+                    animate={{ pathLength: 1, opacity: [0.6, 1, 0.85] }}
+                    transition={{
+                      pathLength: { duration: PULSE_DURATION, ease: SMOOTH_EASE },
+                      opacity: { duration: PULSE_DURATION, times: [0, 0.85, 1], ease: 'easeInOut' },
+                    }}
                   />
                 </svg>
 
