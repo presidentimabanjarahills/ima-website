@@ -10,6 +10,14 @@ import { newsItems } from "./news/data";
 // IMA slides data with local images
 const slides = [
   {
+    id: 13,
+    imageUrl: "/WhatsApp Image 2026-09-02 at 13.18.09.jpeg",
+    altText: "Dr Prabhukumar Challagali as Chief Guest at the Karur Vysya Bank new branch ribbon-cutting ceremony",
+    title: "Chief Guest at Karur Vysya Bank Branch Inauguration",
+    description: "Dr Prabhukumar Challagali graced the ribbon-cutting ceremony as Chief Guest for the new branch of Karur Vysya Bank",
+    readMoreLink: "#achievements"
+  },
+  {
     id: 9,
     imageUrl: "/WhatsApp Image 2026-08-20 at 13.37.00.jpeg",
     altText: "Dr Prabhukumar Challagali honoured with the Reverend Jesse Jackson Award at the 2.0 Health Conference, Las Vegas",
@@ -23,6 +31,14 @@ const slides = [
     altText: "Dr Prabhukumar Challagali receiving an award from Honourable Justice Sri Ujjal Bhuyan, Supreme Court of India",
     title: "Honoured by the Supreme Court of India",
     description: "Dr Prabhukumar Challagali received a prestigious award from Honourable Justice Sri Ujjal Bhuyan, Supreme Court of India, recognising his dedicated service to the medical fraternity",
+    readMoreLink: "#achievements"
+  },
+  {
+    id: 12,
+    imageUrl: "/WhatsApp Image 2026-09-02 at 12.22.11.jpeg",
+    altText: "Dr Prabhukumar Challagali with Hon'ble Union Minister Shri Shripad Naik",
+    title: "With the Hon'ble Union Minister Shri Shripad Naik",
+    description: "Dr Prabhukumar Challagali in a warm meeting with Hon'ble Union Minister Shri Shripad Naik, discussing the initiatives of IMA Banjara Hills",
     readMoreLink: "#achievements"
   },
   {
@@ -153,7 +169,7 @@ export default function HomeClient() {
             <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-12">
               <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-brand-navy/15 shadow-xl flex-shrink-0">
                 <Image
-                  src="/presidentnote.jpg"
+                  src="/WhatsApp Image 2026-09-02 at 14.42.08.jpeg"
                   alt="Dr. Prabhukumar Challagali"
                   fill
                   sizes="(min-width: 640px) 192px, 160px"
@@ -303,7 +319,7 @@ export default function HomeClient() {
         <section className="mb-16">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-brand-navy via-brand-teal to-brand-teal bg-clip-text text-transparent mb-4">
-              IMA Office Bearers 2025
+              IMA Office Bearers
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-brand-navy to-brand-teal mx-auto rounded-full"></div>
           </div>
@@ -315,7 +331,7 @@ export default function HomeClient() {
                 <div className="flex flex-col items-center text-center h-full">
                   <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-full overflow-hidden ring-4 ring-brand-navy/15 shadow-2xl mb-6 group-hover:ring-brand-teal/50 transition-all duration-300">
                     <Image
-                      src="/presidentnote.jpg"
+                      src="/WhatsApp Image 2026-09-02 at 14.42.08.jpeg"
                       alt="Dr. Prabhukumar Challagali"
                       fill
                       sizes="(min-width: 768px) 176px, 160px"
