@@ -73,9 +73,14 @@ export default function StatsStrip({ stats }: { stats: Stat[] }) {
     return () => observer.disconnect();
   }, []);
 
+  const columnsClass =
+    stats.length === 1 ? "sm:grid-cols-1" : stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3";
+
   return (
     <div ref={ref} className="bg-gradient-to-r from-brand-navy to-brand-teal py-8 sm:py-10">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+      <div
+        className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 ${columnsClass} gap-6 sm:gap-8 text-center`}
+      >
         {stats.map((stat) => (
           <StatItem key={stat.label} stat={stat} active={inView} />
         ))}
